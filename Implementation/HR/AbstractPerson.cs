@@ -1,39 +1,39 @@
-﻿namespace Practice.HR
+﻿using Practice.Common;
+using Practice.HR.Events;
+using System;
+
+namespace Practice.HR
 {
     /// <summary>
     ///     Абстрактная база для описания конкретных реализаций типа "Человек".
     ///     Используется для дальнейшего наследования.
     /// </summary>
-    internal abstract class AbstractPerson
+    internal abstract class AbstractPerson : IPerson
     {
-        internal Organization.Department Department
+
+        // От AbstractPerson зависит и Client, но у него нет отдела как такового, 
+        // поэтому я удалил отсюда Department: всё равно он есть в IEmployee.
+
+        private Name name;
+
+        // По идее Name реализует IName, но почему тогда нельзя конкретизировать
+        // для реализуемого свойства?
+        public IName Name
         {
             get
             {
-                throw new System.NotImplementedException();
+                return name;
             }
 
             set
             {
-                throw new System.NotImplementedException();
+                ValueChangeEventArgs<IName> args = new ValueChangeEventArgs<IName>(name);
+                NameChange?.Invoke(this, args);
+                name = new Name(value);
             }
         }
 
-        internal Common.Name Name
-        {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
+        public event EventHandler<ValueChangeEventArgs<IName>> NameChange;
 
-            set
-            {
-                throw new System.NotImplementedException();
-            }
-        }
-        
-        /*
-         * TODO #3: Реализуйте интерфейс IPerson для класса AbstractPerson
-         */
     }
 }

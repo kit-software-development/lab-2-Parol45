@@ -1,4 +1,7 @@
-﻿using Practice.HR;
+﻿using Practice.Common;
+using Practice.HR;
+using Practice.Organization;
+using System;
 
 namespace Practice
 {
@@ -24,13 +27,20 @@ namespace Practice
                 .Department("Бухгалтерия")
                 .Build();
 
+            client.Name = new Name("Даб", "Даб", "Я");
+            Console.WriteLine();
+            employee.Name = new Name("Даб", "Даб", "Я");
+            employee.Department = new Department("Твич");
+
             /*
-             * TODO #8: Собрать приложение. 
+             * Оно собралось!
              */
 
             /*
-             * TODO #9: При помощи отладчика проверить типы и структуру объектов, адресованных переменными client и employee.
+             * Всё работает как часы, за исключением свойства Name в AbstractPerson с типом интерфейса IName,
+             *  из-за которого каждый раз вызывается два конструктора Name. Не знаю, как исправить.
              */
+            Console.ReadKey();
         }
     }
 }
