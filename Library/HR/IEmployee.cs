@@ -13,7 +13,7 @@ namespace Practice.HR
         /// <summary>
         ///     Отдел, в котором работает сотрудник.
         /// </summary>
-        IDepartment Department {get; set;}
+        IDepartment Department { get; set; }
 
         /// <summary>
         ///     Событие изменения отдела, в котором работает сотрудник.
